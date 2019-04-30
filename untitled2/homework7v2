@@ -1,0 +1,88 @@
+# Author: Jacob Duvall
+# Student ID: 112875160
+# Date: April 29, 2019
+# Python 2.7
+
+# Output for my student ID:
+# 1128751602
+# 1128751604
+# 1128751608
+# 1128751610
+# 1128751614
+# 1128751616
+# 1128751620
+# 1128751622
+# 1128751625
+# 1128751626
+# 1128751628
+# 1128751630
+# 1128751632
+# 1128751634
+# 1128751638
+# 1128751640
+# 1128751644
+# 1128751646
+# 1128751650
+# 1128751652
+
+
+# developed in class by Dr. Cheng
+def is_prime(n):
+    if n < 2:
+        return False
+    i = 2
+    while i*i <= n:
+        if n % i == 0:
+            return False
+        i += 1
+    return True
+
+# Sum of Primes and Squared Primes checker
+def is_spsp(number):
+    if number < 6:  # This is the lowest possible SPSP
+        return False
+    list1 = []  # list to store Square Primes less than number
+    for i in Square_Primes():
+        if i > number - 2:  # lowest possible prime is 2
+            break
+        list1.append(i)  # append Square Prime to list
+    for i in list1:
+        if is_prime(number - i):  # check if the difference between Square Prime is prime, if yes, then it is an SPSP
+            return True
+    return False
+
+
+# developed in class by Dr. Cheng
+def Square_Primes():
+    yield 2*2
+    i = 3
+    while True:
+        if is_prime(i):
+            yield i*i
+        i += 2
+
+# Sum of Primes and Sum of Squared Primes generator
+def SPSP(number):
+    while True:
+        if is_spsp(number):
+            yield number
+        number += 1
+
+
+def main():
+    list1 = []  # list to store numbers
+
+    N = 112875160  # Jacob Duvall Student ID
+    Nid = N * 10  # Student ID * 10
+
+
+    for i in SPSP(Nid):  # generate SPSP starting at Nid
+        list1.append(i)  # append to list
+        if len(list1) >= 20:  # add first 20 occurrences to list
+            break
+    for i in list1:  # display list
+        print(i)
+
+
+# run program
+if __name__ == "__main__": main()
